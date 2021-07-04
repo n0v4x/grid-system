@@ -1,0 +1,17 @@
+@use "sass:math";
+
+/// Убирает единицы измерения у числа
+///
+/// @param {Number} $number - Число у которого надо убрать единицы измерения
+/// @return {Number} - Число без единиц измерения
+@function strip-unit($number) {
+  @if (type-of($number) == "number") {
+    @if (not unitless($number)) {
+      @return math.div($number, ($number * 0 + 1));
+    }
+
+    @return $number;
+  } @else {
+    @error "$number is not number type";
+  }
+}
