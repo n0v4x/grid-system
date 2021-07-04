@@ -43,14 +43,14 @@
   width: 100%;
 }
 
-@mixin col-width($column-number, $number-of-columns) {
+@mixin column-width($column-number, $number-of-columns) {
   $width: percentage(math.div($column-number, $number-of-columns));
 
   flex: 0 0 $width;
   max-width: $width;
 }
 
-@mixin col-offset($column-number, $number-of-columns) {
+@mixin column-offset($column-number, $number-of-columns) {
   margin-left: if(
     $column-number == 0,
     none,
@@ -58,26 +58,46 @@
   );
 }
 
-@mixin make-container($max-width: null, $gutter: null) {
-  .container {
-    @extend %container;
-    max-width: $max-width;
+@mixin make-column($column-number: null, $number-of-columns: null) {
+  position: relative;
+  width: 100%;
 
-    @if (is-valid-gutter(($gutter))) {
-      @include gutter($gutter);
-    }
+  @if ($column-number and $number-of-columns) {
+    @include column-width($column-number, $number-of-columns);
   }
 }
 
-@mixin make-row($gutter: null) {
-  .row {
-    @extend %row;
-
-    @if (is-valid-gutter(($gutter))) {
-      @include gutter-suppression($gutter);
-    }
-  }
+@mixin make-container() {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
 }
+
+@mixin make-row() {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// @mixin make-container($max-width: null, $gutter: null) {
+//   .container {
+//     @extend %container;
+//     max-width: $max-width;
+
+//     @if (is-valid-gutter(($gutter))) {
+//       @include gutter($gutter);
+//     }
+//   }
+// }
+
+// @mixin make-row($gutter: null) {
+//   .row {
+//     @extend %row;
+
+//     @if (is-valid-gutter(($gutter))) {
+//       @include gutter-suppression($gutter);
+//     }
+//   }
+// }
 
 @mixin mobile-first-media($width) {
   @if (strip-unit($width) != 0) {
@@ -150,7 +170,7 @@ $row-class-name: "row";
     );
 
     @media (min-width: $breakpoint-value) {
-      @content ($breakpoint-class-infix);
+      @content ($breakpoint-class-infix, $breakpoint-name, $breakpoint-value);
     }
   }
 }
@@ -200,7 +220,7 @@ $row-class-name: "row";
 
   @for $i from 1 through $number-of-columns {
     &--size-#{$i}\/#{$number-of-columns} {
-      @include col-width($i, $number-of-columns);
+      @include column-width($i, $number-of-columns);
     }
   }
 }
@@ -223,30 +243,43 @@ $row-class-name: "row";
 
 @mixin generate-columns-offsets($number-of-columns) {
   &--offset-none {
-    @include col-offset(0, 0);
+    @include column-offset(0, 0);
   }
 
   @for $i from 1 through $number-of-columns - 1 {
     &--offset-#{$i}\/#{$number-of-columns} {
-      @include col-offset($i, $number-of-columns);
+      @include column-offset($i, $number-of-columns);
     }
   }
 }
 
-// @mixin generate-containers($config) {
-//   $breakpoints: get-breakpoints($breakpoints);
-//   $container-config: get-container-config($config);
+@mixin generate-containers($containers) {
+  &--size-full {
+    max-width: none;
+  }
 
-//   @if (type-of($container-config) == ) {
-
-//   }
-// }
+  @each $container-name, $container-max-width in $containers {
+    &--size-#{$container-name} {
+      max-width: $container-max-width;
+    }
+  }
+}
 
 @mixin generate-base-classes($config) {
   $number-of-columns: map-get($config, "number-of-columns");
+  $containers: map-get($config, "containers");
+
+  .#{$container-class-name} {
+    @include make-container();
+    @include generate-containers($containers);
+  }
+
+  .#{$row-class-name} {
+    @include make-row();
+  }
 
   .#{$column-class-name} {
-    @extend %col;
+    @include make-column();
     @include generate-columns($number-of-columns);
     @include generate-columns-orders($number-of-columns);
     @include generate-columns-offsets($number-of-columns);
@@ -255,9 +288,15 @@ $row-class-name: "row";
 
 @mixin generate-breakpoints-classes($config) {
   $breakpoints: map-get($config, "breakpoints");
+  $containers: map-get($config, "containers");
   $number-of-columns: map-get($config, "number-of-columns");
 
-  @include each-breakpoint($breakpoints) using ($breakpoint-class-infix) {
+  @include each-breakpoint($breakpoints) using
+    ($breakpoint-class-infix, $breakpoint-name, $breakpoint-value) {
+    .#{$breakpoint-class-infix}#{$container-class-name} {
+      @include generate-containers($containers);
+    }
+
     .#{$breakpoint-class-infix}#{$column-class-name} {
       @include generate-columns($number-of-columns);
       @include generate-columns-orders($number-of-columns);
@@ -267,25 +306,29 @@ $row-class-name: "row";
 }
 
 @mixin generate-grid-system($config) {
-  // @include generate-base-classes($config);
+  @include generate-base-classes($config);
   @include generate-breakpoints-classes($config);
 }
 
 $grid-system-config: (
   number-of-columns: 12,
   gutter: 30px,
-  // container: (
-  //   xs
-  // ),
-  breakpoints:
-    (
-      xs: 0,
-      sm: 576px,
-      md: 768px,
-      lg: 992px,
-      xl: 1200px,
-      xxl: 1400px,
-    ),
+  containers: (
+    xs: 300px,
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1320px,
+  ),
+  breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+  ),
   order: true,
   offset: true,
 );
