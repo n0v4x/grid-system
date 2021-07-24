@@ -1,0 +1,10 @@
+@mixin make-gutter($gutter: null) {
+  @if (not is-valid-gutter($gutter)) {
+    @error "$gutter in not valid";
+  }
+
+  $half-gutter: div($gutter, 2);
+
+  padding-right: $half-gutter;
+  padding-left: $half-gutter;
+}

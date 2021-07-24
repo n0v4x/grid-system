@@ -2,6 +2,7 @@ const { src, series, parallel, dest, watch } = require("gulp");
 const gulpSass = require("gulp-sass")(require("sass"));
 const browserSync = require("browser-sync").create();
 const del = require("del");
+const gulpStylelint = require("gulp-stylelint");
 
 const cleanTask = () => {
   return del("dist");
@@ -10,6 +11,9 @@ const cleanTask = () => {
 const sassTask = () => {
   return src("src/index.scss", { sourcemaps: true })
     .pipe(gulpSass())
+    .pipe(gulpStylelint({
+      fix: true
+    }))
     .pipe(dest("dist", { sourcemaps: "." }))
     .pipe(browserSync.stream());
 };

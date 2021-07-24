@@ -1,10 +1,9 @@
 .container {
   width: 100%;
-  max-width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
   padding-right: 15px;
+  padding-left: 15px;
 }
 
 .row {
@@ -16,7 +15,8 @@
   position: relative;
   width: 100%;
 }
-.col--size-full {
+
+.col--size-fill {
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
@@ -119,6 +119,9 @@
 .col--offset-none {
   margin-left: none;
 }
+.col--offset-auto {
+  margin-left: "auto";
+}
 .col--offset-1\/12 {
   margin-left: 8.3333333333%;
 }
@@ -154,7 +157,7 @@
 }
 
 @media (min-width: 576px) {
-  .sm\:col--size-full {
+  .sm\:col--size-fill {
     flex-basis: 0;
     flex-grow: 1;
     max-width: 100%;
@@ -257,6 +260,9 @@
   .sm\:col--offset-none {
     margin-left: none;
   }
+  .sm\:col--offset-auto {
+    margin-left: "auto";
+  }
   .sm\:col--offset-1\/12 {
     margin-left: 8.3333333333%;
   }
@@ -292,7 +298,12 @@
   }
 }
 @media (min-width: 768px) {
-  .md\:col--size-full {
+  .container {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .md\:col--size-fill {
     flex-basis: 0;
     flex-grow: 1;
     max-width: 100%;
@@ -395,6 +406,9 @@
   .md\:col--offset-none {
     margin-left: none;
   }
+  .md\:col--offset-auto {
+    margin-left: "auto";
+  }
   .md\:col--offset-1\/12 {
     margin-left: 8.3333333333%;
   }
@@ -430,7 +444,7 @@
   }
 }
 @media (min-width: 992px) {
-  .lg\:col--size-full {
+  .lg\:col--size-fill {
     flex-basis: 0;
     flex-grow: 1;
     max-width: 100%;
@@ -533,6 +547,9 @@
   .lg\:col--offset-none {
     margin-left: none;
   }
+  .lg\:col--offset-auto {
+    margin-left: "auto";
+  }
   .lg\:col--offset-1\/12 {
     margin-left: 8.3333333333%;
   }
@@ -568,7 +585,12 @@
   }
 }
 @media (min-width: 1200px) {
-  .xl\:col--size-full {
+  .container {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
+  .xl\:col--size-fill {
     flex-basis: 0;
     flex-grow: 1;
     max-width: 100%;
@@ -671,6 +693,9 @@
   .xl\:col--offset-none {
     margin-left: none;
   }
+  .xl\:col--offset-auto {
+    margin-left: "auto";
+  }
   .xl\:col--offset-1\/12 {
     margin-left: 8.3333333333%;
   }
@@ -705,8 +730,8 @@
     margin-left: 91.6666666667%;
   }
 }
-@media (min-width: 1400px) {
-  .xxl\:col--size-full {
+@media (min-width: 1440px) {
+  .xxl\:col--size-fill {
     flex-basis: 0;
     flex-grow: 1;
     max-width: 100%;
@@ -808,6 +833,9 @@
   }
   .xxl\:col--offset-none {
     margin-left: none;
+  }
+  .xxl\:col--offset-auto {
+    margin-left: "auto";
   }
   .xxl\:col--offset-1\/12 {
     margin-left: 8.3333333333%;

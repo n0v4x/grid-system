@@ -1,0 +1,83 @@
+@mixin make-column-width($column-number, $number-of-columns) {
+  $width: percentage(div($column-number, $number-of-columns));
+
+  flex: 0 0 $width;
+  max-width: $width;
+}
+
+@mixin make-column-offset($column-number, $number-of-columns) {
+  margin-left: if(
+    $column-number == 0,
+    none,
+    percentage(div($column-number, $number-of-columns))
+  );
+}
+
+@mixin make-column-offset-none() {
+  margin-left: none;
+}
+
+@mixin make-column-offset-auto() {
+  margin-left: "auto";
+}
+
+@mixin make-column($column-number: null, $number-of-columns: null) {
+  position: relative;
+  width: 100%;
+
+  @if ($column-number and $number-of-columns) {
+    @include make-column-width($column-number, $number-of-columns);
+  }
+}
+
+@mixin generate-columns($number-of-columns) {
+  &--size-fill {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  &--size-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+  }
+
+  @for $i from 1 through $number-of-columns {
+    &--size-#{$i}\/#{$number-of-columns} {
+      @include make-column-width($i, $number-of-columns);
+    }
+  }
+}
+
+@mixin generate-columns-orders($number-of-columns) {
+  &--order-first {
+    order: -1;
+  }
+
+  &--order-last {
+    order: $number-of-columns + 1;
+  }
+
+  @for $i from 1 through $number-of-columns {
+    &--order-#{$i} {
+      order: $i;
+    }
+  }
+}
+
+@mixin generate-columns-offsets($number-of-columns) {
+  &--offset-none {
+    @include make-column-offset-none();
+  }
+
+  &--offset-auto {
+    @include make-column-offset-auto();
+  }
+
+  @for $i from 1 through $number-of-columns - 1 {
+    &--offset-#{$i}\/#{$number-of-columns} {
+      @include make-column-offset($i, $number-of-columns);
+    }
+  }
+}

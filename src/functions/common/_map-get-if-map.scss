@@ -1,0 +1,3 @@
+@function map-get-if-map($maybe-map, $key, $default: null) {
+  @return if(type-of($maybe-map) == "map", map-get($maybe-map, $key), $default);
+}

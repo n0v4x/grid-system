@@ -1,0 +1,3 @@
+@function is-valid-gutter($gutter) {
+  @return (type-of($gutter) == "number" and $gutter != 0);
+}

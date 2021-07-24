@@ -1,0 +1,10 @@
+@function normalize-container-config($config-or-max-width: null) {
+  $default-max-width: if(type-of($config-or-max-width == "number"), $config-or-max-width, null);
+  $max-width: map-get-if-map($config-or-max-width, "max-width", $default-max-width);
+  $gutter: map-get-if-map($config-or-max-width, "gutter");
+
+  @return (
+    "gutter": $gutter,
+    "max-width": $max-width
+  )
+};

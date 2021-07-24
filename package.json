@@ -7,10 +7,15 @@
     "browser-sync": "^2.27.4",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
-    "gulp-sass": "^5.0.0"
+    "gulp-sass": "^5.0.0",
+    "gulp-stylelint": "^13.0.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0"
   },
   "scripts": {
-    "start": "gulp"
+    "dev": "gulp"
   },
   "dependencies": {
     "node-sass": "^6.0.1",

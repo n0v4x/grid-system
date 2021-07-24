@@ -1,0 +1,40 @@
+
+// @mixin gutter-suppression($gutter: null) {
+//   @if (not is-valid-gutter($gutter)) {
+//     @error "$gutter in not valid";
+//   }
+
+//   $n-half-gutter: div(-$gutter, 2);
+
+//   margin-right: $n-half-gutter;
+//   margin-left: $n-half-gutter;
+// }
+
+
+
+// @mixin make-container($max-width: null, $gutter: null) {
+//   width: 100%;
+//   max-width: $max-width;
+//   margin-right: auto;
+//   margin-left: auto;
+
+//   @if ($gutter) {
+//     @include gutter($gutter);
+//   }
+// }
+
+
+
+
+// @mixin make-gap($gap) {
+//   $half-gap: div($gap, 2);
+
+//   margin-left: -$half-gap;
+//   margin-right: -$half-gap;
+
+//   & > * {
+//     padding-left: $half-gap;
+//     padding-right: $half-gap;
+//   }
+// }
+

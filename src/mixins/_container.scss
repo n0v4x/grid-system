@@ -1,0 +1,18 @@
+@mixin make-container() {
+  width: 100%;
+
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin make-container-variant($config-or-max-width: null) {
+  $config: normalize-container-config($config-or-max-width);
+  $max-width: map-get($config, "max-width");
+  $gutter: map-get($config, "gutter");
+
+  max-width: $max-width;
+
+  @if ($gutter) {
+    @include make-gutter($gutter);
+  }
+}

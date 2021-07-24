@@ -1,0 +1,20 @@
+@mixin each-breakpoint($breakpoints) {
+  // $zero-value-breakpoint: get-zero-value-breakpoint($breakpoints);
+  // // убираем брейкпойнт с нулевым значением
+  // $breakpoints: map-remove($breakpoints, nth($zero-value-breakpoint, 1));
+
+  @each $breakpoint-name, $breakpoint-value in $breakpoints {
+    $breakpoint-class-infix: make-breakpoint-class-infix(
+      $breakpoint-name,
+      $breakpoint-value
+    );
+
+    @if (strip-unit($breakpoint-value) != 0) {
+      @media (min-width: $breakpoint-value) {
+        @content ($breakpoint-class-infix, $breakpoint-name, $breakpoint-value);
+      }
+    } @else {
+      @content ($breakpoint-class-infix, $breakpoint-name, $breakpoint-value);
+    }
+  }
+}
