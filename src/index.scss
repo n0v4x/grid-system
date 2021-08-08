@@ -2,32 +2,62 @@
 @import "./functions/";
 @import "./mixins/";
 
-$breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1440px,
-);
+// @mixin make-base-grid-system-classes($config) {
+//   $container: map-get($config, "container");
+//   $columns: map-get($config, "columns");
 
-$container: (
-  xs: (
-    gutter: 30px,
-  ),
-  md: (
-    gutter: 40px,
-  ),
-  xl: (
-    gutter: 80px,
-  ),
-);
+//   $zero-value-breakpoint: get-zero-value-breakpoint($breakpoints);
+//   $zero-value-breakpoint-name: nth($zero-value-breakpoint, 1);
 
-$grid-system-config: (
-  columns: 12,
-  container: $container,
-  breakpoints: $breakpoints,
-);
+//   $container-config: map-get-if-map(
+//     $container,
+//     $zero-value-breakpoint-name,
+//     $container
+//   );
+
+//   .#{$container-class-name} {
+//     @include make-container();
+//     @include make-container-variant($container-config);
+//   }
+
+//   .#{$row-class-name} {
+//     @include make-row();
+//   }
+
+//   .#{$column-class-name} {
+//     @include make-column();
+//   }
+// }
+
+// @mixin make-breakpoint-grid-system-classes($config) {
+//   $breakpoints: map-get($config, "breakpoints");
+//   $container: map-get($config, "container");
+//   $columns: map-get($config, "columns");
+
+//   $zero-value-breakpoint: get-zero-value-breakpoint($breakpoints);
+//   $zero-value-breakpoint-name: nth($zero-value-breakpoint, 1);
+
+//   @include each-breakpoint($breakpoints) using
+//     ($breakpoint-class-infix, $breakpoint-name, $breakpoint-value) {
+//     $breakpoint-container-config: map-get-if-map($container, $breakpoint-name);
+
+//     @if (
+//       $zero-value-breakpoint-name !=
+//         $breakpoint-name and
+//         $breakpoint-container-config
+//     ) {
+//       &#{$container-class-name} {
+//         @include make-container-variant($breakpoint-container-config);
+//       }
+//     }
+
+//     &#{$breakpoint-class-infix}#{$column-class-name} {
+//       @include generate-columns($columns);
+//       @include generate-columns-orders($columns);
+//       @include generate-columns-offsets($columns);
+//     }
+//   }
+// }
 
 @mixin generate-grid-system($config) {
   $breakpoints: map-get($config, "breakpoints");
@@ -35,6 +65,11 @@ $grid-system-config: (
   $columns: map-get($config, "columns");
 
   $zero-value-breakpoint: get-zero-value-breakpoint($breakpoints);
+
+  @if not $zero-value-breakpoint {
+    @error "Zero value breakpoint should be first in the list instead of \"#{$zero-value-breakpoint}\" and has zero number or nul as a value";
+  }
+
   $zero-value-breakpoint-name: nth($zero-value-breakpoint, 1);
 
   $container-config: map-get-if-map(
@@ -78,4 +113,71 @@ $grid-system-config: (
   }
 }
 
+$breakpoints: (
+  xxs: null,
+  xs: 414px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1440px,
+);
+
+$container: (
+  xxs: (
+    gutter: 30px,
+  ),
+  md: (
+    gutter: 40px,
+  ),
+  xl: (
+    gutter: 80px,
+  ),
+);
+
+$grid-system-config: (
+  columns: 12,
+  container: $container,
+  breakpoints: $breakpoints,
+);
+
 @include generate-grid-system($grid-system-config);
+
+// @include each-breakpoint($breakpoints) using ($infix, $name, $value) {
+//   @debug $infix;
+// }
+
+// $mobile-grid-system-config: (
+//   columns: 3,
+//   container: (
+//     xxs: (
+//       gutter: 30px
+//     )
+//   ),
+//   breakpoints: (
+//     xxs: 0,
+//     xs: 414px,
+//     sm: 576px
+//  ),
+// );
+
+// $tablet-grid-system-config: (
+//   columns: (
+//     xxs: 3,
+
+//   ),
+//   container: (
+//     "mobile\:xs": (
+//       gutter: 30px
+//     )
+//   ),
+//   breakpoints: (
+//     "mobile\:xs": null,
+//     "mobile\:xs": 414px,
+//     sm: 576px
+//   ),
+// );
+
+// .mobile {
+//   @include make-breakpoint-grid-system-classes();
+// }

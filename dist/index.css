@@ -80,6 +80,9 @@
 .col--order-last {
   order: 13;
 }
+.col--order-0 {
+  order: 0;
+}
 .col--order-1 {
   order: 1;
 }
@@ -156,6 +159,150 @@
   margin-left: 91.6666666667%;
 }
 
+@media (min-width: 414px) {
+  .xs\:col--size-fill {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+  .xs\:col--size-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+  }
+  .xs\:col--size-1\/12 {
+    flex: 0 0 8.3333333333%;
+    max-width: 8.3333333333%;
+  }
+  .xs\:col--size-2\/12 {
+    flex: 0 0 16.6666666667%;
+    max-width: 16.6666666667%;
+  }
+  .xs\:col--size-3\/12 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .xs\:col--size-4\/12 {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+  }
+  .xs\:col--size-5\/12 {
+    flex: 0 0 41.6666666667%;
+    max-width: 41.6666666667%;
+  }
+  .xs\:col--size-6\/12 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .xs\:col--size-7\/12 {
+    flex: 0 0 58.3333333333%;
+    max-width: 58.3333333333%;
+  }
+  .xs\:col--size-8\/12 {
+    flex: 0 0 66.6666666667%;
+    max-width: 66.6666666667%;
+  }
+  .xs\:col--size-9\/12 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+  .xs\:col--size-10\/12 {
+    flex: 0 0 83.3333333333%;
+    max-width: 83.3333333333%;
+  }
+  .xs\:col--size-11\/12 {
+    flex: 0 0 91.6666666667%;
+    max-width: 91.6666666667%;
+  }
+  .xs\:col--size-12\/12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .xs\:col--order-first {
+    order: -1;
+  }
+  .xs\:col--order-last {
+    order: 13;
+  }
+  .xs\:col--order-0 {
+    order: 0;
+  }
+  .xs\:col--order-1 {
+    order: 1;
+  }
+  .xs\:col--order-2 {
+    order: 2;
+  }
+  .xs\:col--order-3 {
+    order: 3;
+  }
+  .xs\:col--order-4 {
+    order: 4;
+  }
+  .xs\:col--order-5 {
+    order: 5;
+  }
+  .xs\:col--order-6 {
+    order: 6;
+  }
+  .xs\:col--order-7 {
+    order: 7;
+  }
+  .xs\:col--order-8 {
+    order: 8;
+  }
+  .xs\:col--order-9 {
+    order: 9;
+  }
+  .xs\:col--order-10 {
+    order: 10;
+  }
+  .xs\:col--order-11 {
+    order: 11;
+  }
+  .xs\:col--order-12 {
+    order: 12;
+  }
+  .xs\:col--offset-none {
+    margin-left: none;
+  }
+  .xs\:col--offset-auto {
+    margin-left: "auto";
+  }
+  .xs\:col--offset-1\/12 {
+    margin-left: 8.3333333333%;
+  }
+  .xs\:col--offset-2\/12 {
+    margin-left: 16.6666666667%;
+  }
+  .xs\:col--offset-3\/12 {
+    margin-left: 25%;
+  }
+  .xs\:col--offset-4\/12 {
+    margin-left: 33.3333333333%;
+  }
+  .xs\:col--offset-5\/12 {
+    margin-left: 41.6666666667%;
+  }
+  .xs\:col--offset-6\/12 {
+    margin-left: 50%;
+  }
+  .xs\:col--offset-7\/12 {
+    margin-left: 58.3333333333%;
+  }
+  .xs\:col--offset-8\/12 {
+    margin-left: 66.6666666667%;
+  }
+  .xs\:col--offset-9\/12 {
+    margin-left: 75%;
+  }
+  .xs\:col--offset-10\/12 {
+    margin-left: 83.3333333333%;
+  }
+  .xs\:col--offset-11\/12 {
+    margin-left: 91.6666666667%;
+  }
+}
 @media (min-width: 576px) {
   .sm\:col--size-fill {
     flex-basis: 0;
@@ -220,6 +367,9 @@
   }
   .sm\:col--order-last {
     order: 13;
+  }
+  .sm\:col--order-0 {
+    order: 0;
   }
   .sm\:col--order-1 {
     order: 1;
@@ -367,6 +517,9 @@
   .md\:col--order-last {
     order: 13;
   }
+  .md\:col--order-0 {
+    order: 0;
+  }
   .md\:col--order-1 {
     order: 1;
   }
@@ -507,6 +660,9 @@
   }
   .lg\:col--order-last {
     order: 13;
+  }
+  .lg\:col--order-0 {
+    order: 0;
   }
   .lg\:col--order-1 {
     order: 1;
@@ -654,6 +810,9 @@
   .xl\:col--order-last {
     order: 13;
   }
+  .xl\:col--order-0 {
+    order: 0;
+  }
   .xl\:col--order-1 {
     order: 1;
   }
@@ -794,6 +953,9 @@
   }
   .xxl\:col--order-last {
     order: 13;
+  }
+  .xxl\:col--order-0 {
+    order: 0;
   }
   .xxl\:col--order-1 {
     order: 1;

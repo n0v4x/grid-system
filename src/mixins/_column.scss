@@ -1,4 +1,4 @@
-@mixin make-column-width($column-number, $number-of-columns) {
+@mixin make-column-variant($column-number, $number-of-columns) {
   $width: percentage(div($column-number, $number-of-columns));
 
   flex: 0 0 $width;
@@ -26,7 +26,7 @@
   width: 100%;
 
   @if ($column-number and $number-of-columns) {
-    @include make-column-width($column-number, $number-of-columns);
+    @include make-column-variant($column-number, $number-of-columns);
   }
 }
 
@@ -45,7 +45,7 @@
 
   @for $i from 1 through $number-of-columns {
     &--size-#{$i}\/#{$number-of-columns} {
-      @include make-column-width($i, $number-of-columns);
+      @include make-column-variant($i, $number-of-columns);
     }
   }
 }
@@ -59,7 +59,7 @@
     order: $number-of-columns + 1;
   }
 
-  @for $i from 1 through $number-of-columns {
+  @for $i from 0 through $number-of-columns {
     &--order-#{$i} {
       order: $i;
     }

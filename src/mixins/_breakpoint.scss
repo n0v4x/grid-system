@@ -9,7 +9,7 @@
       $breakpoint-value
     );
 
-    @if (strip-unit($breakpoint-value) != 0) {
+    @if $breakpoint-value and strip-unit($breakpoint-value) != 0 {
       @media (min-width: $breakpoint-value) {
         @content ($breakpoint-class-infix, $breakpoint-name, $breakpoint-value);
       }

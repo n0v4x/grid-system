@@ -1,6 +1,6 @@
 @function make-breakpoint-class-infix($breakpoint-name, $breakpoint-value) {
   $breakpoint-class-infix: if(
-    $breakpoint-value and $breakpoint-value != 0,
+    $breakpoint-value != null,
     "#{$breakpoint-name}\\:",
     ""
   );
@@ -10,10 +10,11 @@
 
 @function get-zero-value-breakpoint($breakpoints) {
   $zero-value-breakpoint: nth($breakpoints, 1);
+  $breakpoint-value: nth($zero-value-breakpoint, 2);
 
-  @if (strip-unit(nth($zero-value-breakpoint, 2)) != 0) {
-    @error "Zero value breakpoint should be first in the list instead of \"#{$zero-value-breakpoint}\"";
+  @if $breakpoint-value == null or strip-unit($breakpoint-value) == 0 {
+    @return $zero-value-breakpoint;
   }
 
-  @return $zero-value-breakpoint;
+  @return null;
 }
